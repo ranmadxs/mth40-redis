@@ -36,8 +36,7 @@ app.get('/', (req, res) =>
 app.use('/config', configController);
 
 const Heroku = require('heroku-client')
-const heroku = new Heroku({ token: process.env.HEROKU_API_TOKEN })
-
+const heroku = new Heroku({ token: '9c9a4170-dda3-42b0-934f-e7aeff211dee' })
 
 heroku.get('/apps').then(apps => {
     logger.info(apps);
