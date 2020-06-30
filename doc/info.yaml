@@ -1,0 +1,7 @@
+version: "${version}"
+title: WH40K Redis-API
+contact:
+  email: grineldosanchez@yahoo.es
+  name: Admin
+  url: 'http://relatosdelaherejia.cl'
+description: Api de servicio Redis WH40K
