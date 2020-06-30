@@ -1,2 +1,4 @@
 /config/redis/clear:
   $ref: ./config/redisClear.yaml
+/config/url:
+  $ref: ./config/getUrl.yaml

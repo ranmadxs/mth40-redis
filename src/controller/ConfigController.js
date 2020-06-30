@@ -6,9 +6,13 @@ var redisFactory = require('../factories/RedisFactory');
 
 logger.info("Config Controller", "[CTRL_INIT]");
 
+router.get('/url', function(req, res) {
+    logger.info("Get Url Redis");
+    res.writeHead(200, {'Content-Type': 'application/json'});
+    res.end(JSON.stringify({url: redisFactory.getURl()}));
+});
 
 router.get('/redis/clear', function(req, res) {
-
     logger.info("Clear Redis Keys");
     redisFactory.flushall();
     res.writeHead(200, {'Content-Type': 'application/json'});

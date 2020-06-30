@@ -14,6 +14,10 @@ class RedisFactory {
         logger.debug("Connection Redis Factory", "[REDIS_INIT]");
     }
 
+    getURl() {
+        return this.urlRedis;
+    }
+
     async disconnect(){
         logger.info("Redis [OFF]");
         this.client.quit();
