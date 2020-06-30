@@ -48,8 +48,8 @@ app.listen(mth40.config.PORT, async () => {
     logger.debug("mth40-api starting on port="+mth40.config.PORT);
     const docSample = await loadSwagger.load('./doc/index.yaml');
     const swaggerDocument = YAML.parse(docSample);
-    const redisPromised = redisFactory.connect();
-
+    //const redisPromised = redisFactory.connect();
+    const redisPromised = null;
     app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerDocument));
 
     Promise.all([redisPromised]).then(respVal => {
