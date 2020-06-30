@@ -38,10 +38,11 @@ app.use('/config', configController);
 const Heroku = require('heroku-client')
 const heroku = new Heroku({ token: '9c9a4170-dda3-42b0-934f-e7aeff211dee' })
 
-heroku.get('/apps').then(apps => {
+heroku.get('/addons/redis-perpendicular-81331').then(apps => {
     logger.info(apps);
 })
 
+logger.warn(process.env, 'process.env');
 
 app.listen(mth40.config.PORT, async () => {
     logger.debug("mth40-api starting on port="+mth40.config.PORT);
