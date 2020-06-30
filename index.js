@@ -42,19 +42,19 @@ heroku.get('/addons/redis-perpendicular-81331').then(apps => {
     logger.info(apps);
 })
 
-logger.warn(process.env, 'process.env');
+logger.warn(process.env.REDIS_URL, 'process.env');
 
 app.listen(mth40.config.PORT, async () => {
     logger.debug("mth40-api starting on port="+mth40.config.PORT);
     const docSample = await loadSwagger.load('./doc/index.yaml');
     const swaggerDocument = YAML.parse(docSample);
-    //const redisPromised = redisFactory.connect();
+    const redisPromised = redisFactory.connect();
     const redisPromised = null;
     app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerDocument));
 
     Promise.all([redisPromised]).then(respVal => {
         console.log("********************************************************");
-        //console.log(respVal);
+        console.log(respVal);
         console.log('************* Server running on port ' + mth40.config.PORT + " **************");
         console.log("********************************************************");
     }).catch(reason => { 

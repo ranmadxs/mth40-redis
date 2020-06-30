@@ -12,6 +12,7 @@ try {
     mth40 = {
         config : {
             PORT : process.env.PORT || mth40Properties.api.port,
+            REDIS_URL : process.env.REDIS_URL || mth40Properties.redis.url,
         },
         properties: mth40Properties
     }
