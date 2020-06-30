@@ -1,5 +1,8 @@
 require('dotenv').config();
 require('./src/banner');
+const Heroku = require('heroku-client')
+const heroku = new Heroku({ token: '9c9a4170-dda3-42b0-934f-e7aeff211dee' })
+
 const express = require('express');
 const app = express();
 var logger = require('./LogConfig');
@@ -35,13 +38,6 @@ app.get('/', (req, res) =>
 
 app.use('/config', configController);
 
-const Heroku = require('heroku-client')
-const heroku = new Heroku({ token: '9c9a4170-dda3-42b0-934f-e7aeff211dee' })
-
-heroku.get('/addons/redis-perpendicular-81331').then(apps => {
-    logger.info(apps);
-})
-
 logger.warn(process.env.REDIS_URL, 'process.env');
 
 app.listen(mth40.config.PORT, async () => {
@@ -50,6 +46,10 @@ app.listen(mth40.config.PORT, async () => {
     const swaggerDocument = YAML.parse(docSample);
     const redisPromised = redisFactory.connect();
     app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerDocument));
+
+    await heroku.get('/addons/redis-perpendicular-81331').then(apps => {
+        logger.info(apps);
+    })
 
     Promise.all([redisPromised]).then(respVal => {
         console.log("********************************************************");

@@ -1,0 +1,15 @@
+get:
+    tags:
+      - config-api
+    summary: URL conección de Redis
+    operationId: getUrl
+    description: Servicio que obtiene la url de Redis
+    responses:
+      '200':
+        description: Resultado operación Redis getUrl
+        content:
+          application/json:
+            schema:
+              type: object
+      '400':
+        description: Mala petición
