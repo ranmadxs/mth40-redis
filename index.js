@@ -35,6 +35,15 @@ app.get('/', (req, res) =>
 
 app.use('/config', configController);
 
+const Heroku = require('heroku-client')
+const heroku = new Heroku({ token: process.env.HEROKU_API_TOKEN })
+
+
+heroku.get('/apps').then(apps => {
+    logger.info(apps);
+})
+
+
 app.listen(mth40.config.PORT, async () => {
     logger.debug("mth40-api starting on port="+mth40.config.PORT);
     const docSample = await loadSwagger.load('./doc/index.yaml');
@@ -45,7 +54,7 @@ app.listen(mth40.config.PORT, async () => {
 
     Promise.all([redisPromised]).then(respVal => {
         console.log("********************************************************");
-        console.log(respVal);
+        //console.log(respVal);
         console.log('************* Server running on port ' + mth40.config.PORT + " **************");
         console.log("********************************************************");
     }).catch(reason => { 
